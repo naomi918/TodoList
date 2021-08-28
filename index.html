@@ -116,7 +116,7 @@
         var each = document.getElementById("each");
         var newtag = document.createElement('div');
         
-        if (each.value == null){
+        if (each.value == ""){
           return;
         }
         newtag.innerHTML="<input type='checkbox' onclick='getCheckedCnt()' id='"+num+"'/><label for ='"+num+"'><span>"+each.value+"</span></label>";
