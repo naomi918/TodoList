@@ -127,10 +127,12 @@
       }
       
       function getCheckedCnt(){
+        const total = "ininput[type='checkbox']"
         const query = "input[type='checkbox']:checked";
+        const totalElements = document.querySelectorAll(total);
         const selectedElements = document.querySelectorAll(query);
-        const count = selectedElements.length;
-
+        const count = totalElements.length - selectedElements.length;
+        
         document.getElementById("kaisuu").innerHTML = count;
       }
     </script>
