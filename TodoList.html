@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title></title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+    <style>
+      #date {
+        margin-top: 20px;
+        margin-left: 20px;
+      }
+      #month{color:rgb(101, 146, 101); font-size: 30px;}
+      #day { color: rgb(51, 172, 27); font-size: 80px;}
+      #btn {
+        position: fixed;
+        right: 50px;
+        bottom:50px;
+      }
+
+      #kaisuu{
+        position: fixed;
+        right: 50px; top:30px;
+        font-size: 80px;
+        font-weight: bold;
+        color: rgb(48, 177, 22);
+      }
+
+      #each{
+        position: fixed;
+        left: 30px;
+        bottom:70px;
+        width:50%;
+        height: 30px;
+      }
+      #plus{
+        background-color:rgb(78, 185, 57);
+        border-color: rgb(78, 185, 57);
+        color: rgb(255, 255, 255);
+        padding: 10px;
+        font-size: 50px;
+        width: 80px;
+        border-radius: 50%;
+      }
+
+
+      #task input[type="checkbox"] {display:none;}
+
+      #task input[type="checkbox"] + label span {
+        display:block;
+        background: url(uncheck.png) left top no-repeat;
+        background-size: 40px;
+        padding: 4px 0 10px 40px;
+        margin: 10px 10px 0 0;
+        border: #8f8f8f;
+        vertical-align:middle;
+        cursor:pointer;
+        font-size: 20px;
+        
+      }
+
+      #task input[type="checkbox"]:checked + label span{
+        background: url(check.png) left top no-repeat;
+        background-size: 40px;
+        padding: 4px 0 10px 40px;
+        margin: 10px 10px 0 0;
+        padding-left: 40px;
+        text-decoration: line-through;
+        color: #8f8f8f;
+        
+       }  
+    </style>
+
+  </head>
+  <body>
+    <div id = "date">
+      <span id = "month"></span><br>
+      <span id ="day"></span>
+    </div>
+    
+    <div id = "kaisuu">
+      0
+    </div><hr>
+
+    <div id ="task">
+    </div>
+
+    <div>
+      <input type = "text" id="each"> 
+    </div>
+
+    <div id ="btn">
+      <button id = "plus" onclick="taskAdd();">+</button>
+    </div>
+
+    <script>
+      var task = document.getElementById("task");
+      var kaisuu = document.getElementById("kaisuu");
+      var today = new Date();
+      var vmonth = today.getMonth()+1;
+      var vdate = today.getDate();  
+      var num = 0;
+      document.getElementById("month").innerHTML= vmonth+"월";
+      document.getElementById("day").innerHTML= vdate+"일";
+
+
+      if (vdate == today.getDate()){
+        while(task.hasChildNodes()){
+          task.removeChild(task.lastChild);
+        }
+      }
+
+      function taskAdd(){
+        var task = document.getElementById("task");
+        var each = document.getElementById("each");
+        console.log(task);
+        var newtag = document.createElement('div');
+        newtag.innerHTML="<input type='checkbox' onclick='getCheckedCnt()' id='"+num+"'/><label for ='"+num+"'><span>"+each.value+"</span></label>";
+        task.appendChild(newtag);
+        each.value=""
+        num++;
+        kaisuu.innerHTML = num;
+      }
+      
+      function getCheckedCnt(){
+        const query = "input[type='checkbox']:checked";
+        const selectedElements = document.querySelectorAll(query);
+        const count = selectedElements.length;
+
+        document.getElementById("kaisuu").innerHTML = count;
+      }
+    </script>
+
+  </body>
+
+</html>
